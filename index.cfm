@@ -1,7 +1,6 @@
 <h1>CFWheels JWT</h1>
-
-<p>CFWheels Plugin ported from existing CFML Component for encoding and decoding <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html">JSON Web Tokens (JWT)</a>.</p>
-<p>Which in turn is a port of the node.js project <a href="https://github.com/hokaccha/node-jwt-simple">node-jwt-simple</a> to cfml. It currently supports HS256, HS384, and HS512 signing algorithms.</p>
+<p>CFWheels Plugin ported from existing CFML Component by <a href="https://github.com/jsteinshouer/cf-jwt-simple">Jason Steinshouer</a> for encoding and decoding <a href="http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html">JSON Web Tokens (JWT)</a>, which in turn is a port of the node.js project <a href="https://github.com/hokaccha/node-jwt-simple">node-jwt-simple</a> to cfml.</p>
+<p>It currently supports HS256, HS384, and HS512 signing algorithms.</p>
 <h2>Usage</h2>
 <pre><code>&lt;cfscript&gt;
 	// Initialize the component with the secret signing key
