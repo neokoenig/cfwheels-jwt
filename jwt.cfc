@@ -5,6 +5,18 @@ component hint="jwt" output="false" mixin="global"
 		return this;
 	}
 
+	/**
+	*
+	* Main entry point for jwt. `encode()`, `decode()`, `verify()` and `sign()` are available.
+	*
+	* [section: Plugins]
+	* [category: JWT]
+	*
+	* @key Your Secret Key
+	* @ignoreExpiration ignore `exp` claim during verification
+	* @issuer add `iss` registered claims during verification
+	* @audience add `aud` registered claims during verification
+	*/
    	public any function jwt(
    		required key,
    		boolean ignoreExpiration="false",

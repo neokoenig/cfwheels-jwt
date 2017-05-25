@@ -1,0 +1,30 @@
+{
+  // Required:
+ "name":"CFWheels JWT",
+ "version":"0.0.0",
+ "author":"Tom King",
+  // Required: GitHub Repository stub
+ "location":"neokoenig/cfwheels-jwt#v0.0.0",
+  // Required: Should always be /plugins/
+ "directory":"/plugins/",
+  // Required: Should always be true
+ "createPackageDirectory":true,
+  // Required: Must be the name of your primary CFC File
+ "packageDirectory":"jwt",
+  // Required: The Forgebox slug, must be unique
+ "slug":"cfwheels-jwt",
+  // Required: Must be cfwheels-plugins
+ "type":"cfwheels-plugins",
+  // Required: From here is optional but recommended
+ "homepage":"https://github.com/neokoenig/cfwheels-jwt",
+ "shortDescription":"CFWheels plugin for encoding and decoding JSON Web Tokens (JWT)",
+ "keywords":"JWT",
+ "private":false,
+ "scripts":{
+    "postVersion":"package set location='neokoenig/cfwheels-jwt#v`package version`'",
+    "patch-release":"bump --patch",
+    "minor-release":"bump --minor",
+    "major-release":"bump --major",
+    "postPublish":"!git push --follow-tags && publish"
+  }
+}
