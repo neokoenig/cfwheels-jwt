@@ -2,6 +2,8 @@
 
 ## Description
 
+[![Build Status](https://travis-ci.org/neokoenig/cfwheels-jwt.svg?branch=master)](https://travis-ci.org/neokoenig/cfwheels-jwt)
+
 CFWheels Plugin ported from existing CFML Component by [Jason Steinshouer](https://github.com/jsteinshouer/cf-jwt-simple) for encoding and decoding [JSON Web Tokens (JWT)](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html), which in turn is a port of the node.js project [node-jwt-simple](https://github.com/hokaccha/node-jwt-simple) to cfml.
 
 It currently supports HS256, HS384, and HS512 signing algorithms.
