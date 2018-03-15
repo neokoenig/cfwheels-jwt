@@ -1,13 +1,14 @@
 component hint="jwt" output="false" mixin="global"
 {
 	public function init() {
-		this.version 			= "2.0";
+		this.version = "2.0";
 		return this;
 	}
 
 	/**
 	*
-	* Main entry point for jwt. `encode()`, `decode()`, `verify()` and `sign()` are available.
+	* Main entry point for jwt. (JSON Web Tokens)
+	* `encode()`, `decode()`, `verify()` and `sign()` are available.
 	*
 	* [section: Plugins]
 	* [category: JWT]
@@ -27,15 +28,17 @@ component hint="jwt" output="false" mixin="global"
 		var ignoreExpiration 	= arguments.ignoreExpiration;
 		var issuer 				= arguments.issuer;
 		var audience 			= arguments.audience;
+
 		//  Supported algorithms
 		var algorithmMap = {
 			"HS256" = "HmacSHA256",
 			"HS384" = "HmacSHA384",
 			"HS512" = "HmacSHA512"
 		};
-		/*
-		decode(string) as struct
-		Description:  Decode a JSON Web Token
+
+		/**
+			decode(string) as struct
+			Decode a JSON Web Token
 		*/
 		local.decode= function(required token){
 			//  Token should contain 3 segments
@@ -74,9 +77,9 @@ component hint="jwt" output="false" mixin="global"
 		}
 
 
-		/*
-		encode(struct,[string]) as String
-		Description:  encode a data structure as a JSON Web Token
+		/**
+			encode(struct,[string]) as String
+			encode a data structure as a JSON Web Token
 		*/
 		local.encode = function(required payload, algorithm="HS256"){
 			//  Default hash algorithm
@@ -93,9 +96,9 @@ component hint="jwt" output="false" mixin="global"
 			segments = listAppend(segments, sign(segments,algorithmMap[hashAlgorithm]),".");
 			return segments;
 		}
-		/*
-		verify(token) as Boolean
-		Description:  Verify the token signature
+		/**
+			verify(token) as Boolean
+			Verify the token signature
 		*/
 		local.verify=function(required token){
 			var isValid = true;
@@ -107,9 +110,9 @@ component hint="jwt" output="false" mixin="global"
 			return isValid;
 		}
 
-		/*
-		sign(string,[string]) as String
-		Description: Create an MHAC of provided string using the secret key and algorithm
+		/**
+			sign(string,[string]) as String
+			Description: Create an MHAC of provided string using the secret key and algorithm
 		*/
 		local.sign=function(required string msg, algorithm="HmacSHA256"){
 			var key = createObject("java", "javax.crypto.spec.SecretKeySpec").init(key.getBytes(), arguments.algorithm);
@@ -117,46 +120,45 @@ component hint="jwt" output="false" mixin="global"
 			mac.init(key);
 			return $base64UrlEscape(toBase64(mac.doFinal(msg.getBytes())));
 		}
-
-
-
 		return local;
    	}
 
-
-	/*  	$base64UrlEscape(String) as String
-			Description:  Escapes unsafe url characters from a base64 string
+	/**
+	  	$base64UrlEscape(String) as String
+		Escapes unsafe url characters from a base64 string
 	*/
-
 	function $base64UrlEscape(required str) output=false {
 		return reReplace(reReplace(reReplace(str, "\+", "-", "all"), "\/", "_", "all"),"=", "", "all");
 	}
-	/*  	$base64UrlUnescape(String) as String
-			Description: restore base64 characters from an url escaped string
-	*/
 
+	/**
+	  	$base64UrlUnescape(String) as String
+		Description: restore base64 characters from an url escaped string
+	*/
 	function $base64UrlUnescape(required str) output=false {
 		//  Unescape url characters
 		var base64String = reReplace(reReplace(arguments.str, "\-", "+", "all"), "\_", "/", "all");
 		var padding = repeatstring("=",4 - len(base64String) mod 4);
 		return base64String & padding;
 	}
-	/*  	$base64UrlDecode(String) as String
-			Description:  Decode a url encoded base64 string
-	*/
 
+	/**
+	  	$base64UrlDecode(String) as String
+		Decode a url encoded base64 string
+	*/
 	function $base64UrlDecode(required str) output=false {
 		return toString(toBinary($base64UrlUnescape(arguments.str)));
 	}
-	/*  	$epochTimeToLocalDate(numeric) as Datetime
-			Description:  Converts Epoch datetime to local date
 
-			I changed the date conversion to use Java instead of dateAdd()
-			because currently (12/12/2016), ACF dateAdd uses an integer so there is a limit
-			of 2147483647 (Tue, 19 Jan 2038 03:14:07 GMT) which i doubt anyone
-			will still use this in 2038 but I changed it anyway.
+	/**
+		$epochTimeToLocalDate(numeric) as Datetime
+		Converts Epoch datetime to local date
+
+		I changed the date conversion to use Java instead of dateAdd()
+		because currently (12/12/2016), ACF dateAdd uses an integer so there is a limit
+		of 2147483647 (Tue, 19 Jan 2038 03:14:07 GMT) which i doubt anyone
+		will still use this in 2038 but I changed it anyway.
 	*/
-
 	function $epochTimeToLocalDate(required epoch) output=false {
 		return createObject("java", "java.util.Date").init(epoch*1000);
 	}
