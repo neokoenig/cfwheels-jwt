@@ -1,22 +1,22 @@
 {
- "name":"CFWheels JWT",
- "version":"0.0.0",
- "author":"Tom King",
- "location":"neokoenig/cfwheels-jwt#v0.0.0",
- "directory":"/plugins/",
- "createPackageDirectory":true,
- "packageDirectory":"jwt",
- "slug":"cfwheels-jwt",
- "type":"cfwheels-plugins",
- "homepage":"https://github.com/neokoenig/cfwheels-jwt",
- "shortDescription":"CFWheels plugin for encoding and decoding JSON Web Tokens (JWT)",
- "keywords":"JWT",
- "private":false,
- "scripts":{
-    "postVersion":"package set location='neokoenig/cfwheels-jwt#v`package version`'",
-    "patch-release":"bump --patch",
-    "minor-release":"bump --minor",
-    "major-release":"bump --major",
-    "postPublish":"!git push --follow-tags && publish"
-  }
+    "name":"CFWheels JWT",
+    "version":"1.0.0",
+    "author":"Tom King",
+    "location":"neokoenig/cfwheels-jwt#v1.0.0",
+    "directory":"/plugins/",
+    "createPackageDirectory":true,
+    "packageDirectory":"jwt",
+    "slug":"cfwheels-jwt",
+    "type":"cfwheels-plugins",
+    "homepage":"https://github.com/neokoenig/cfwheels-jwt",
+    "shortDescription":"CFWheels plugin for encoding and decoding JSON Web Tokens (JWT)",
+    "keywords":"JWT",
+    "private":false,
+    "scripts":{
+        "postVersion":"package set location='neokoenig/cfwheels-jwt#v`package version`'",
+        "patch-release":"bump --patch",
+        "minor-release":"bump --minor",
+        "major-release":"bump --major",
+        "postPublish":"!git push --follow-tags && publish"
+    }
 }
