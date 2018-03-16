@@ -24,10 +24,6 @@ component hint="jwt" output="false" mixin="global"
    		string issuer="",
    		string audience=""
    	){
-		var key 				= arguments.key;
-		var ignoreExpiration 	= arguments.ignoreExpiration;
-		var issuer 				= arguments.issuer;
-		var audience 			= arguments.audience;
 
 		//  Supported algorithms
 		var algorithmMap = {
@@ -41,6 +37,7 @@ component hint="jwt" output="false" mixin="global"
 			Decode a JSON Web Token
 		*/
 		local.decode= function(required token){
+
 			//  Token should contain 3 segments
 			if ( listLen(arguments.token,".") != 3 ) {
 				throw( message="Token should contain 3 segments", type="Invalid Token" );
@@ -74,8 +71,7 @@ component hint="jwt" output="false" mixin="global"
 				throw( message="Signature verification failed: Invalid key", type="Invalid Token" );
 			}
 			return payload;
-		}
-
+		};
 
 		/**
 			encode(struct,[string]) as String
@@ -95,7 +91,7 @@ component hint="jwt" output="false" mixin="global"
 			segments = listAppend(segments, $base64UrlEscape(toBase64(serializeJSON(arguments.payload))),".");
 			segments = listAppend(segments, sign(segments,algorithmMap[hashAlgorithm]),".");
 			return segments;
-		}
+		};
 		/**
 			verify(token) as Boolean
 			Verify the token signature
@@ -108,7 +104,7 @@ component hint="jwt" output="false" mixin="global"
 				isValid = false;
 			}
 			return isValid;
-		}
+		};
 
 		/**
 			sign(string,[string]) as String
@@ -119,7 +115,7 @@ component hint="jwt" output="false" mixin="global"
 			var mac = createObject("java", "javax.crypto.Mac").getInstance(arguments.algorithm);
 			mac.init(key);
 			return $base64UrlEscape(toBase64(mac.doFinal(msg.getBytes())));
-		}
+		};
 		return local;
    	}
 
